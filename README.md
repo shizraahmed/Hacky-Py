@@ -6,7 +6,7 @@ Know a bit of python &amp; need pr for hacktoberfest ? come join us in the journ
 
 # :handshake: Our Contributors
 <a href="https://github.com/hctnm1/Hacky-Py/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=hctnm1/Hacky-Py" />
+  <img src="https://contrib.rocks/image?repo=hctnm1/Hacky-PY"/>
 </a>
 
 # Recommended Repos
