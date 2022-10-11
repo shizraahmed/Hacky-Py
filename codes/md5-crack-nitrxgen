@@ -1,0 +1,9 @@
+import requests as s
+
+wordlist = input("add some file: ")
+list = open(wordlist).readlines()
+for md5 in list:
+  md5 = md5.replace('\n','')
+  result = s.get(f"http://www.nitrxgen.net/md5db/{md5}").text
+  result = f"{md5}  {result}\n"
+  open(f'result_{wordlist}.txt','a').write(result)
