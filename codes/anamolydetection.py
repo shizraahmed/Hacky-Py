@@ -30,50 +30,42 @@ from sklearn.metrics import roc_auc_score
 
 # Define the datafile and read X and y
 
-mat_file_list = ['arrhythmia.mat',
-                 ' cardio.mat',
-                 'glass.mat',
-                 'ioneshphere.mat',
-                 'letter.mat',
-                 'lympho.mat',
-                 'mnist.mat',
-                 'musk.mat',
-                 'optdigits.mat',
-                 'pendigits.mat',
-                 'pima.mat',
-                 'satellite.mat',
-                 'shuttle.mat',
-                 'vertebral.mat',
-                 'vowels.mat',
-                 'wbc.mat']
-                 
-            
-df_columns = ['Data', ' # Samples' , '# Dimensions' , 'Outliers Perc' , 'ABOD','CBLOF','FB','HBOS' , 'IForest', 'KNN' , 'LOF' , 'MCD','OCSVM','PCA']
+mat_file_list = [
+    "arrhythmia.mat",
+    " cardio.mat",
+    "glass.mat",
+    "ioneshphere.mat",
+    "letter.mat",
+    "lympho.mat",
+    "mnist.mat",
+    "musk.mat",
+    "optdigits.mat",
+    "pendigits.mat",
+    "pima.mat",
+    "satellite.mat",
+    "shuttle.mat",
+    "vertebral.mat",
+    "vowels.mat",
+    "wbc.mat",
+]
 
-              
+
+df_columns = [
+    "Data",
+    " # Samples",
+    "# Dimensions",
+    "Outliers Perc",
+    "ABOD",
+    "CBLOF",
+    "FB",
+    "HBOS",
+    "IForest",
+    "KNN",
+    "LOF",
+    "MCD",
+    "OCSVM",
+    "PCA",
+]
+
+
 roc_df = pd.DataFrame
-                 
-                 
-                 
-                 
-                 
-                 
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

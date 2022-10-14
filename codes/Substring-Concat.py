@@ -1,5 +1,7 @@
 # Link to Question : https://leetcode.com/problems/substring-with-concatenation-of-all-words/
 from collections import Counter, deque
+
+
 class Solution:
     def findSubstring(s, words):
         words_counter = Counter(words)
@@ -10,7 +12,7 @@ class Solution:
         for offset in range(WORDLEN):
             counter = words_counter.copy()
             for i in range(offset, len(s), WORDLEN):
-                word = s[i: i + WORDLEN]
+                word = s[i : i + WORDLEN]
                 while len(stack) and word not in counter:
                     prev = stack.popleft()
                     if prev == word:

@@ -22,8 +22,7 @@ class AVLTree(object):
         else:
             root.right = self.insert_node(root.right, key)
 
-        root.height = 1 + max(self.getHeight(root.left),
-                              self.getHeight(root.right))
+        root.height = 1 + max(self.getHeight(root.left), self.getHeight(root.right))
 
         # Update the balance factor and balance the tree
         balanceFactor = self.getBalance(root)
@@ -64,14 +63,12 @@ class AVLTree(object):
                 return temp
             temp = self.getMinValueNode(root.right)
             root.key = temp.key
-            root.right = self.delete_node(root.right,
-                                          temp.key)
+            root.right = self.delete_node(root.right, temp.key)
         if root is None:
             return root
 
         # Update the balance factor of nodes
-        root.height = 1 + max(self.getHeight(root.left),
-                              self.getHeight(root.right))
+        root.height = 1 + max(self.getHeight(root.left), self.getHeight(root.right))
 
         balanceFactor = self.getBalance(root)
 
@@ -96,10 +93,8 @@ class AVLTree(object):
         T2 = y.left
         y.left = z
         z.right = T2
-        z.height = 1 + max(self.getHeight(z.left),
-                           self.getHeight(z.right))
-        y.height = 1 + max(self.getHeight(y.left),
-                           self.getHeight(y.right))
+        z.height = 1 + max(self.getHeight(z.left), self.getHeight(z.right))
+        y.height = 1 + max(self.getHeight(y.left), self.getHeight(y.right))
         return y
 
     # Function to perform right rotation
@@ -108,10 +103,8 @@ class AVLTree(object):
         T3 = y.right
         y.right = z
         z.left = T3
-        z.height = 1 + max(self.getHeight(z.left),
-                           self.getHeight(z.right))
-        y.height = 1 + max(self.getHeight(y.left),
-                           self.getHeight(y.right))
+        z.height = 1 + max(self.getHeight(z.left), self.getHeight(z.right))
+        y.height = 1 + max(self.getHeight(y.left), self.getHeight(y.right))
         return y
 
     # Get the height of the node

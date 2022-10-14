@@ -22,12 +22,14 @@ from assertpy import assert_that
 # Attention: If the number has leading zeros the amount
 #  of digits should be considered.
 
+
 def increment_the_end_number_by_one(line: str) -> str:
-    head = line.rstrip('0123456789')
-    tail = line[len(head):]
+    head = line.rstrip("0123456789")
+    tail = line[len(head) :]
     if tail == "":
         return line + "1"
     return head + str(int(tail) + 1).zfill(len(tail))
+
 
 class TestIncrementalString:
     def test_increments_without_number_at_the_end(self):

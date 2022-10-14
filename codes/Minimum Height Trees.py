@@ -32,29 +32,30 @@ The given input is guaranteed to be a tree and there will be no repeated edges.
 
 ## CODE
 
+
 class Solution:
     def findMinHeightTrees(self, n: int, edges: List[List[int]]) -> List[int]:
-        
+
         if n <= 2:
             return [x for x in range(n)]
-        
-        baju = [set() for x in range(n)] 
+
+        baju = [set() for x in range(n)]
         for shuru, end in edges:
             baju[shuru].add(end)
             baju[end].add(shuru)
-        
+
         leaves = []
-        
+
         for i in range(n):
             if len(baju[i]) == 1:
                 leaves.append(i)
-        
+
         remaining_nodes = n
 
         while remaining_nodes > 2:
             remaining_nodes -= len(leaves)
             temp = []
-            
+
             for leaf in leaves:
                 for neighbor in baju[leaf]:
                     baju[neighbor].remove(leaf)
@@ -62,6 +63,5 @@ class Solution:
                         temp.append(neighbor)
 
             leaves = temp
-        
+
         return leaves
-        

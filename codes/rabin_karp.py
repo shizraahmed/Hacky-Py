@@ -3,6 +3,7 @@
 
 d = 10
 
+
 def search(pattern, text, q):
     m = len(pattern)
     n = len(text)
@@ -12,30 +13,30 @@ def search(pattern, text, q):
     i = 0
     j = 0
 
-    for i in range(m-1):
-        h = (h*d) % q
+    for i in range(m - 1):
+        h = (h * d) % q
 
     # Calculate hash value for pattern and text
     for i in range(m):
-        p = (d*p + ord(pattern[i])) % q
-        t = (d*t + ord(text[i])) % q
+        p = (d * p + ord(pattern[i])) % q
+        t = (d * t + ord(text[i])) % q
 
     # Find the match
-    for i in range(n-m+1):
+    for i in range(n - m + 1):
         if p == t:
             for j in range(m):
-                if text[i+j] != pattern[j]:
+                if text[i + j] != pattern[j]:
                     break
 
             j += 1
             if j == m:
-                print("Pattern is found at position: " + str(i+1))
+                print("Pattern is found at position: " + str(i + 1))
 
-        if i < n-m:
-            t = (d*(t-ord(text[i])*h) + ord(text[i+m])) % q
+        if i < n - m:
+            t = (d * (t - ord(text[i]) * h) + ord(text[i + m])) % q
 
             if t < 0:
-                t = t+q
+                t = t + q
 
 
 text = "ABCCDDAEFG"

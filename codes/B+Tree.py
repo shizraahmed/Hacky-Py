@@ -1,4 +1,3 @@
-
 import math
 
 # Node creation
@@ -13,17 +12,17 @@ class Node:
 
     # Insert at the leaf
     def insert_at_leaf(self, leaf, value, key):
-        if (self.values):
+        if self.values:
             temp1 = self.values
             for i in range(len(temp1)):
-                if (value == temp1[i]):
+                if value == temp1[i]:
                     self.keys[i].append(key)
                     break
-                elif (value < temp1[i]):
+                elif value < temp1[i]:
                     self.values = self.values[:i] + [value] + self.values[i:]
                     self.keys = self.keys[:i] + [[key]] + self.keys[i:]
                     break
-                elif (i + 1 == len(temp1)):
+                elif i + 1 == len(temp1):
                     self.values.append(value)
                     self.keys.append([key])
                     break
@@ -44,32 +43,32 @@ class BplusTree:
         old_node = self.search(value)
         old_node.insert_at_leaf(old_node, value, key)
 
-        if (len(old_node.values) == old_node.order):
+        if len(old_node.values) == old_node.order:
             node1 = Node(old_node.order)
             node1.check_leaf = True
             node1.parent = old_node.parent
             mid = int(math.ceil(old_node.order / 2)) - 1
-            node1.values = old_node.values[mid + 1:]
-            node1.keys = old_node.keys[mid + 1:]
+            node1.values = old_node.values[mid + 1 :]
+            node1.keys = old_node.keys[mid + 1 :]
             node1.nextKey = old_node.nextKey
-            old_node.values = old_node.values[:mid + 1]
-            old_node.keys = old_node.keys[:mid + 1]
+            old_node.values = old_node.values[: mid + 1]
+            old_node.keys = old_node.keys[: mid + 1]
             old_node.nextKey = node1
             self.insert_in_parent(old_node, node1.values[0], node1)
 
     # Search operation for different operations
     def search(self, value):
         current_node = self.root
-        while(current_node.check_leaf == False):
+        while current_node.check_leaf == False:
             temp2 = current_node.values
             for i in range(len(temp2)):
-                if (value == temp2[i]):
+                if value == temp2[i]:
                     current_node = current_node.keys[i + 1]
                     break
-                elif (value < temp2[i]):
+                elif value < temp2[i]:
                     current_node = current_node.keys[i]
                     break
-                elif (i + 1 == len(current_node.values)):
+                elif i + 1 == len(current_node.values):
                     current_node = current_node.keys[i + 1]
                     break
         return current_node
@@ -87,7 +86,7 @@ class BplusTree:
 
     # Inserting at the parent
     def insert_in_parent(self, n, value, ndash):
-        if (self.root == n):
+        if self.root == n:
             rootNode = Node(n.order)
             rootNode.values = [value]
             rootNode.keys = [n, ndash]
@@ -99,23 +98,25 @@ class BplusTree:
         parentNode = n.parent
         temp3 = parentNode.keys
         for i in range(len(temp3)):
-            if (temp3[i] == n):
-                parentNode.values = parentNode.values[:i] + \
-                    [value] + parentNode.values[i:]
-                parentNode.keys = parentNode.keys[:i +
-                                                  1] + [ndash] + parentNode.keys[i + 1:]
-                if (len(parentNode.keys) > parentNode.order):
+            if temp3[i] == n:
+                parentNode.values = (
+                    parentNode.values[:i] + [value] + parentNode.values[i:]
+                )
+                parentNode.keys = (
+                    parentNode.keys[: i + 1] + [ndash] + parentNode.keys[i + 1 :]
+                )
+                if len(parentNode.keys) > parentNode.order:
                     parentdash = Node(parentNode.order)
                     parentdash.parent = parentNode.parent
                     mid = int(math.ceil(parentNode.order / 2)) - 1
-                    parentdash.values = parentNode.values[mid + 1:]
-                    parentdash.keys = parentNode.keys[mid + 1:]
+                    parentdash.values = parentNode.values[mid + 1 :]
+                    parentdash.keys = parentNode.keys[mid + 1 :]
                     value_ = parentNode.values[mid]
-                    if (mid == 0):
-                        parentNode.values = parentNode.values[:mid + 1]
+                    if mid == 0:
+                        parentNode.values = parentNode.values[: mid + 1]
                     else:
                         parentNode.values = parentNode.values[:mid]
-                    parentNode.keys = parentNode.keys[:mid + 1]
+                    parentNode.keys = parentNode.keys[: mid + 1]
                     for j in parentNode.keys:
                         j.parent = parentNode
                     for j in parentdash.keys:
@@ -167,7 +168,13 @@ class BplusTree:
             node_.keys[0].parent = None
             del node_
             return
-        elif (len(node_.keys) < int(math.ceil(node_.order / 2)) and node_.check_leaf == False) or (len(node_.values) < int(math.ceil((node_.order - 1) / 2)) and node_.check_leaf == True):
+        elif (
+            len(node_.keys) < int(math.ceil(node_.order / 2))
+            and node_.check_leaf == False
+        ) or (
+            len(node_.values) < int(math.ceil((node_.order - 1) / 2))
+            and node_.check_leaf == True
+        ):
 
             is_predecessor = 0
             parentNode = node_.parent
@@ -283,16 +290,16 @@ def printTree(tree):
 
     node1 = Node(str(level[0]) + str(tree.root.values))
 
-    while (len(lst) != 0):
+    while len(lst) != 0:
         x = lst.pop(0)
         lev = level.pop(0)
-        if (x.check_leaf == False):
+        if x.check_leaf == False:
             for i, item in enumerate(x.keys):
                 print(item.values)
         else:
             for i, item in enumerate(x.keys):
                 print(item.values)
-            if (flag == 0):
+            if flag == 0:
                 lev_leaf = lev
                 leaf = x
                 flag = 1
@@ -300,15 +307,15 @@ def printTree(tree):
 
 record_len = 3
 bplustree = BplusTree(record_len)
-bplustree.insert('5', '33')
-bplustree.insert('15', '21')
-bplustree.insert('25', '31')
-bplustree.insert('35', '41')
-bplustree.insert('45', '10')
+bplustree.insert("5", "33")
+bplustree.insert("15", "21")
+bplustree.insert("25", "31")
+bplustree.insert("35", "41")
+bplustree.insert("45", "10")
 
 printTree(bplustree)
 
-if(bplustree.find('5', '34')):
+if bplustree.find("5", "34"):
     print("Found")
 else:
     print("Not found")

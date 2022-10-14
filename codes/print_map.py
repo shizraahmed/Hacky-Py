@@ -2,11 +2,13 @@ a = 10
 b = 0
 c = 10
 
-s = ("TFy!QJu ROo TNn(ROo)SLq SLq ULo+UHs"
-     " UJq TNn*RPn/QPbEWS_JSWQAIJO^NBELPe"
-     "HBFHT}TnALVlBLOFAkHFOuFETpHCStHAUFA"
-     "gcEAelclcn^r^r\\tZvYxXyT|S~Pn SPm S"
-     "On TNn ULo0ULo#ULo-WHq!WFs XDt!")
+s = (
+    "TFy!QJu ROo TNn(ROo)SLq SLq ULo+UHs"
+    " UJq TNn*RPn/QPbEWS_JSWQAIJO^NBELPe"
+    "HBFHT}TnALVlBLOFAkHFOuFETpHCStHAUFA"
+    "gcEAelclcn^r^r\\tZvYxXyT|S~Pn SPm S"
+    "On TNn ULo0ULo#ULo-WHq!WFs XDt!"
+)
 
 a = ord(s[b])
 
@@ -23,6 +25,6 @@ while a != 0:
                 c = c // 9
                 print(end=chr(c))
             else:
-                print(chr(33 ^ (b & 0X01)), end='')
+                print(chr(33 ^ (b & 0x01)), end="")
     else:
         break
