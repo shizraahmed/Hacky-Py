@@ -1,12 +1,10 @@
 class Node(object):
-
     def _init_(self, val):
         self.val = val
         self.next = None
 
 
 class MyLinkedList(object):
-
     def _init_(self):
         """
         Initialize your data structure here.

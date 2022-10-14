@@ -1,15 +1,15 @@
-# Disclaimer: This script is for educational purposes only.  
-# Do not use against any photos that you don't own or have authorization to test. 
+# Disclaimer: This script is for educational purposes only.
+# Do not use against any photos that you don't own or have authorization to test.
 
 #!/usr/bin/env python3
 
-# Please note: 
+# Please note:
 # This program is for .JPG and .TIFF format files. The program could be extended to support .HEIC, .PNG and other formats.
 # Installation and usage instructions:
 # 1. Install Pillow (Pillow will not work if you have PIL installed):
 # python3 -m pip install --upgrade pip
 # python3 -m pip install --upgrade Pillow
-# 2. Add .jpg images downloaded from Flickr to subfolder ./images from where the script is stored. 
+# 2. Add .jpg images downloaded from Flickr to subfolder ./images from where the script is stored.
 # Try the following Flickr account: https://www.flickr.com/photos/194419969@N07/? (Please don't use other Flickr accounts).
 # Note most social media sites strip exif data from uploaded photos.
 
@@ -20,12 +20,22 @@ from PIL.ExifTags import GPSTAGS, TAGS
 
 
 # Helper function
-def create_google_maps_url(gps_coords):            
+def create_google_maps_url(gps_coords):
     # Exif data stores coordinates in degree/minutes/seconds format. To convert to decimal degrees.
     # We extract the data from the dictionary we sent to this function for latitudinal data.
-    dec_deg_lat = convert_decimal_degrees(float(gps_coords["lat"][0]),  float(gps_coords["lat"][1]), float(gps_coords["lat"][2]), gps_coords["lat_ref"])
+    dec_deg_lat = convert_decimal_degrees(
+        float(gps_coords["lat"][0]),
+        float(gps_coords["lat"][1]),
+        float(gps_coords["lat"][2]),
+        gps_coords["lat_ref"],
+    )
     # We extract the data from the dictionary we sent to this function for longitudinal data.
-    dec_deg_lon = convert_decimal_degrees(float(gps_coords["lon"][0]),  float(gps_coords["lon"][1]), float(gps_coords["lon"][2]), gps_coords["lon_ref"])
+    dec_deg_lon = convert_decimal_degrees(
+        float(gps_coords["lon"][0]),
+        float(gps_coords["lon"][1]),
+        float(gps_coords["lon"][2]),
+        gps_coords["lon_ref"],
+    )
     # We return a search string which can be used in Google Maps
     return f"https://maps.google.com/?q={dec_deg_lat},{dec_deg_lon}"
 
@@ -37,10 +47,11 @@ def convert_decimal_degrees(degree, minutes, seconds, direction):
     if direction == "S" or direction == "W":
         decimal_degrees *= -1
     return decimal_degrees
-        
+
 
 # Print Logo
-print("""
+print(
+    """
                                                                 
  _______   _____________   _____ _____  _____ _     
 |  ___\ \ / /_   _|  ___| |_   _|  _  ||  _  | |    
@@ -50,12 +61,15 @@ print("""
 \____/\/   \/\___/\_|       \_/  \___/  \___/\_____/
                                                     
                                                     
-""")
+"""
+)
 
 
 # Choice whether to keep output in the Terminal or redirect to a file.
 while True:
-    output_choice = input("How do you want to receive the output:\n\n1 - File\n2 - Terminal\nEnter choice here: ")
+    output_choice = input(
+        "How do you want to receive the output:\n\n1 - File\n2 - Terminal\nEnter choice here: "
+    )
     try:
         conv_val = int(output_choice)
         if conv_val == 1:
@@ -89,16 +103,18 @@ for file in files:
     try:
         # Open the image file. We open the file in binary format for reading.
         image = Image.open(file)
-        print(f"_______________________________________________________________{file}_______________________________________________________________")
+        print(
+            f"_______________________________________________________________{file}_______________________________________________________________"
+        )
         # The ._getexif() method returns a dictionary. .items() method returns a list of all dictionary keys and values.
         gps_coords = {}
-        # We check if exif data are defined for the image. 
+        # We check if exif data are defined for the image.
         if image._getexif() == None:
             print(f"{file} contains no exif data.")
         # If exif data are defined we can cycle through the tag, and value for the file.
         else:
             for tag, value in image._getexif().items():
-                # If you print the tag without running it through the TAGS.get() method you'll get numerical values for every tag. We want the tags in human-readable form. 
+                # If you print the tag without running it through the TAGS.get() method you'll get numerical values for every tag. We want the tags in human-readable form.
                 # You can see the tags and the associated decimal number in the exif standard here: https://exiv2.org/tags.html
                 tag_name = TAGS.get(tag)
                 if tag_name == "GPSInfo":
@@ -116,11 +132,11 @@ for file in files:
                             gps_coords["lat_ref"] = val
                         # We add Longitude reference data to the gps_coord dictionary which we initialized in line 110.
                         elif GPSTAGS.get(key) == "GPSLongitudeRef":
-                            gps_coords["lon_ref"] = val   
+                            gps_coords["lon_ref"] = val
                 else:
                     # We print data not related to the GPSInfo.
                     print(f"{tag_name} - {value}")
-            # We print the longitudinal and latitudinal data which has been formatted for Google Maps. We only do so if the GPS Coordinates exists. 
+            # We print the longitudinal and latitudinal data which has been formatted for Google Maps. We only do so if the GPS Coordinates exists.
             if gps_coords:
                 print(create_google_maps_url(gps_coords))
             # Change back to the original working directory.

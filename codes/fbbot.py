@@ -10,22 +10,22 @@ from fbchat.models import *
 # password = os.getenv("PASSWORD")
 username = input("USERNAME")
 password = input("PASSWORD")
-#dotenv required for Heroku
-
-
+# dotenv required for Heroku
 
 
 class FBChatClient(Client):
-    def onMessage(self,
-                  mid=None,
-                  author_id=None,
-                  message=None,
-                  message_object=None,
-                  thread_id=None,
-                  thread_type=ThreadType.USER,
-                  ts=None,
-                  metadata=None,
-                  msg=None):
+    def onMessage(
+        self,
+        mid=None,
+        author_id=None,
+        message=None,
+        message_object=None,
+        thread_id=None,
+        thread_type=ThreadType.USER,
+        ts=None,
+        metadata=None,
+        msg=None,
+    ):
         self.markAsDelivered(thread_id, message_object.uid)
         self.markAsRead(thread_id)
 
@@ -35,22 +35,24 @@ class FBChatClient(Client):
         if thread_type != ThreadType.USER:
             return
 
-        if '/nepse' in message.lower():
-            api_json = requests.get('http://api-nepse.herokuapp.com/todays_price').json()
+        if "/nepse" in message.lower():
+            api_json = requests.get(
+                "http://api-nepse.herokuapp.com/todays_price"
+            ).json()
             array_given = message.split()
-            if(len(array_given) > 1):
+            if len(array_given) > 1:
                 response = array_given[1].strip()
-                if response.lower() == 'companies':
+                if response.lower() == "companies":
                     keys = api_json.keys()
                     i = 1
-                    string = 'List of Symbols for checking NEPSE\n\n'
+                    string = "List of Symbols for checking NEPSE\n\n"
                     for key in keys:
-                        string = string + str(i) + ') ' + key + '\n'
+                        string = string + str(i) + ") " + key + "\n"
                         i += 1
                 else:
                     try:
                         response = response.upper()
-                        status = api_json[response]           
+                        status = api_json[response]
                         string = f"NEPSE Stats For {response}\n\n"
                         string += f"Name: {status['name']}\n"
                         string += f"Conf: {status['conf']}\n"
@@ -69,13 +71,14 @@ class FBChatClient(Client):
                         string += f"52 weeks High: {status['52 weeks high']}\n"
                         string += f"52 weeks Low: {status['52 weeks high']}"
                     except KeyError:
-                        string = 'The symbol does not match any records! Please enter a valid symbol'
+                        string = "The symbol does not match any records! Please enter a valid symbol"
         else:
             string = 'A NEPSE stats bot \n\nSend "/nepse companies" to get symbols of Companies Listed in NEPSE\n\n Send /nepse <symbol> to get the stats for that company\n\nCoded by:  @scifidemon'
         self.send(Message(string), thread_id=thread_id)
         print(f">> {message}")
         print()
         print()
+
 
 client = FBChatClient(username, password, logging_level=35)
 

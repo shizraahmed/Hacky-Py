@@ -2,8 +2,9 @@
 import time
 import random
 
+
 def partition(arr, l, h):
-    pivot, i, j = arr[l], l+1, h
+    pivot, i, j = arr[l], l + 1, h
     while i <= j:
         if arr[i] > pivot and arr[j] < pivot:
             arr[i], arr[j] = arr[j], arr[i]
@@ -18,8 +19,8 @@ def partition(arr, l, h):
 def quicksort(arr, l, h):
     if l < h:
         pi = partition(arr, l, h)
-        quicksort(arr, l, pi-1)
-        quicksort(arr, pi+1, h)
+        quicksort(arr, l, pi - 1)
+        quicksort(arr, pi + 1, h)
 
 
 l = []
@@ -30,7 +31,7 @@ for i in range(a):
     l.append(n)
 
 start = time.time()
-quicksort(l, 0, a-1)
+quicksort(l, 0, a - 1)
 end = time.time()
-t = end-start
+t = end - start
 print(f"quicksort running time: {t:.4f}")

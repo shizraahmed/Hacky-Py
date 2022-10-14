@@ -8,7 +8,7 @@ uppercase_char = string.ascii_uppercase
 nums = string.digits
 special_char = "!@#$%^&*()=+-~/[]{};:<>`"
 
-password = ''
+password = ""
 count = 0
 length_error = False
 uppercase_error = False
@@ -21,46 +21,55 @@ uppercase_req = int(input("How many Uppercase letter are Required? "))
 num_req = int(input("How many Numbers are required? "))
 special_req = int(input("How many special characters are required? "))
 
+
 def error(length, uppercase_req, num_req, special_req):
     global length_error
     global uppercase_error
     global num_error
     global special_error
-    if (length <= 0):
+    if length <= 0:
         length_error = True
-    if (uppercase_req < 0):
+    if uppercase_req < 0:
         uppercase_error = True
-    if (num_req < 0):
+    if num_req < 0:
         num_error = True
-    if (special_req < 0):
+    if special_req < 0:
         special_error = True
+
 
 def make_password(required_count, character_set):
     global count
     global password
-    while (count < required_count):
+    while count < required_count:
         password += secrets.choice(character_set)
         count += 1
     count = 0
+
 
 def shuffle(s):
     l = list(s)
     random.shuffle(l)
     return "".join(l)
 
-#Error Message
+
+# Error Message
 error(length, uppercase_req, num_req, special_req)
-if (length_error):
+if length_error:
     print("Invalid length!")
-if (uppercase_error):
+if uppercase_error:
     print("Invalid uppercase letter requirement!")
-if (num_error):
+if num_error:
     print("Invalid number requirement!")
-if (special_error):
+if special_error:
     print("Invalid special character requirement!")
 
 
-if ((not length_error) and (not uppercase_error) and (not num_error) and (not special_error)):
+if (
+    (not length_error)
+    and (not uppercase_error)
+    and (not num_error)
+    and (not special_error)
+):
     make_password(uppercase_req, uppercase_char)
     make_password(num_req, nums)
     make_password(special_req, special_char)

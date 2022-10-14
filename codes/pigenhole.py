@@ -11,9 +11,9 @@ def pigeonhole_sort(a):
             pigeonholes[count] -= 1
             a[j] = count + minimum
             j += 1
-              
-  
-a = [12, 16, 19, 10,  9]
+
+
+a = [12, 16, 19, 10, 9]
 print("The array is :")
 print(a)
 print("Sorted array is :")
