@@ -1,14 +1,14 @@
 def gray_code(bit_count: int) -> list:
- # bit count represents no. of bits in the gray code
+    # bit count represents no. of bits in the gray code
     if bit_count < 0:
         raise ValueError("The given input must be positive")
 
     # get the generated string sequence
     sequence = gray_code_sequence_string(bit_count)
-    #
+
     # convert them to integers
     for i in range(len(sequence)):
-        sequence[i] = int(sequence[i], 2)f
+        sequence[i] = int(sequence[i], 2)
 
     return sequence
 
