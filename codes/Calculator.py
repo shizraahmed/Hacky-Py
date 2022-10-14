@@ -10,7 +10,7 @@ france = []
 
 def com():
     history.clear()
-    dr.configure(text="HISTORY:" + '  '.join(france), font="verdana 14 bold")
+    dr.configure(text="HISTORY:" + "  ".join(france), font="verdana 14 bold")
 
 
 def red():
@@ -18,23 +18,23 @@ def red():
     qw = list(q.get())
     π = 22 / 7
     if qw[w - 1] == "+":
-        q.insert(w, 'π')
+        q.insert(w, "π")
     elif qw[w - 1] == "-":
-        q.insert(w, 'π')
+        q.insert(w, "π")
     elif qw[w - 1] == "*":
-        q.insert(w, 'π')
+        q.insert(w, "π")
     elif qw[w - 1] == "/":
-        q.insert(w, 'π')
-    elif q.get() == '0':
-        q.delete(0, 'end')
-        q.insert(w, 'π')
+        q.insert(w, "π")
+    elif q.get() == "0":
+        q.delete(0, "end")
+        q.insert(w, "π")
     else:
-        q.insert(w, '*π')
+        q.insert(w, "*π")
 
 
 def repo(x):
-    if q.get() == '0':
-        q.delete(0, 'end')
+    if q.get() == "0":
+        q.delete(0, "end")
         q.insert(0, str(x))
     else:
         wa = len(q.get())
@@ -42,28 +42,28 @@ def repo(x):
 
 
 def bst(x):
-    if q.get() != '0':
+    if q.get() != "0":
         wa = len(q.get())
         q.insert(wa, str(x))
 
 
 def dele():
-    q.delete(0, 'end')
-    q.insert(0, '0')
+    q.delete(0, "end")
+    q.insert(0, "0")
 
 
 history = []
 
 
 def wer():
-    q.insert(len(q.get()), '**')
+    q.insert(len(q.get()), "**")
 
 
 def back():
     l = len(q.get())
     if l == 1:
-        q.delete(0, 'end')
-        q.insert(0, '0')
+        q.delete(0, "end")
+        q.insert(0, "0")
     else:
         q.delete(l - 1, l)
 
@@ -79,12 +79,12 @@ def result():
     except:
         print("error")
         result = "error"
-    q.delete(0, 'end')
+    q.delete(0, "end")
     q.insert(0, str(result))
-    history.append(r + '=' + str(result))
+    history.append(r + "=" + str(result))
     history.reverse()
 
-    dr.configure(text="HISTORY:" + '|||'.join(history[0:5]), font="verdana 14 bold")
+    dr.configure(text="HISTORY:" + "|||".join(history[0:5]), font="verdana 14 bold")
 
 
 history = []
@@ -99,16 +99,16 @@ def eng():
         print("error")
         result = "error"
     d = result ** (1 / 2)
-    q.delete(0, 'end')
+    q.delete(0, "end")
     q.insert(0, d)
-    history.append(r + '=' + str(d))
+    history.append(r + "=" + str(d))
     history.reverse()
 
-    dr.configure(text="HISTORY:" + '|||'.join(history[0:5]), font="verdana 14 bold")
+    dr.configure(text="HISTORY:" + "|||".join(history[0:5]), font="verdana 14 bold")
 
 
 # ------------------------------------------canvas
-d = Canvas(root, bg='white', width="700", height="500")
+d = Canvas(root, bg="white", width="700", height="500")
 d.place(x=0, y=0)
 
 # =------------------------------------------------
@@ -117,7 +117,7 @@ d.place(x=0, y=0)
 
 # entry box----------------
 q = Entry(root, width=40, bd=6, justify=RIGHT, bg="#e6e6fa")
-q.insert(0, '0')
+q.insert(0, "0")
 q.place(x=30, y=30)
 q.config(font=("Helvetica", 22))
 # number buttons--------------------------
@@ -169,7 +169,7 @@ k = Button(root, text="=", width=10, bg="#e6e6fa", command=result)
 k.place(x=250, y=325)
 k.config(font=("verdana 20 bold", 12))
 
-k = Button(root, text=".", width=10, bg="#e6e6fa", command=lambda x='.': repo(x))
+k = Button(root, text=".", width=10, bg="#e6e6fa", command=lambda x=".": repo(x))
 k.place(x=140, y=325)
 k.config(font=("verdana 20 bold", 12))
 
@@ -189,19 +189,19 @@ we = d.create_line(0, 90, 0, 375, fill="black", width=15)
 
 # operator buttons-------=-=-=------------------------------------
 
-ee = Button(root, text="+", width=8, bg="#e6e6fa", command=lambda x='+': bst(x), bd=5)
+ee = Button(root, text="+", width=8, bg="#e6e6fa", command=lambda x="+": bst(x), bd=5)
 ee.place(x=400, y=100)
 ee.config(font=("verdana 20 bold", 15))
 
-ww = Button(root, text="-", width=8, bg="#e6e6fa", command=lambda x='-': bst(x), bd=5)
+ww = Button(root, text="-", width=8, bg="#e6e6fa", command=lambda x="-": bst(x), bd=5)
 ww.place(x=550, y=100)
 ww.config(font=("verdana 40 bold", 15))
 
-aa = Button(root, text="*", width=8, bg="#e6e6fa", command=lambda x='*': bst(x), bd=5)
+aa = Button(root, text="*", width=8, bg="#e6e6fa", command=lambda x="*": bst(x), bd=5)
 aa.place(x=400, y=160)
 aa.config(font=("verdana 14 bold", 15))
 
-kk = Button(root, text="/", width=8, bg="#e6e6fa", command=lambda x='/': bst(x), bd=5)
+kk = Button(root, text="/", width=8, bg="#e6e6fa", command=lambda x="/": bst(x), bd=5)
 kk.place(x=550, y=160)
 kk.config(font=("verdana 14 bold", 15))
 
@@ -218,9 +218,9 @@ ii.place(x=590, y=340)
 ii.config(font=("verdana 14 bold", 12))
 # =================--------------------------------------------------------
 # ==============-----------------history====--------------
-dr = Label(root, text="HISTORY:", anchor=W, font='verdana 14 bold', height=5)
+dr = Label(root, text="HISTORY:", anchor=W, font="verdana 14 bold", height=5)
 dr.pack(side=BOTTOM, fill=X)
-we = Label(root, text="a", font='Courier', height=1, bg="#e6e6fa")
+we = Label(root, text="a", font="Courier", height=1, bg="#e6e6fa")
 we.place(x=530, y=283)
 
 root.mainloop()
